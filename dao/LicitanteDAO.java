@@ -28,7 +28,7 @@ public class LicitanteDAO {
 	    public boolean alterar(Licitante licitante) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ? WHERE id = ?;";
+	            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ? WHERE idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitante.getNome());
 	            ps.setInt(2, licitante.getId());
@@ -44,7 +44,7 @@ public class LicitanteDAO {
 	    public boolean excluir(Licitante licitante) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE id = ?;";
+	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, licitante.getId());
 	            ps.executeUpdate();
@@ -59,7 +59,7 @@ public class LicitanteDAO {
 	    public Licitante procurarPorCodigo(Licitante licitante) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE id = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, licitante.getId());
 	            ResultSet rs = ps.executeQuery();

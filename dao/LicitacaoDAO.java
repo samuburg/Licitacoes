@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Licitacao;
+import com.Licitante;
 
 import conexao.Conexao;
 
@@ -15,10 +16,10 @@ public class LicitacaoDAO {
 	    public boolean inserir(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "INSERT INTO " + NOMEDATABELA + " (nome) VALUES (?);";
+	            String sql = "INSERT INTO " + NOMEDATABELA + " (descricao, idLicitante) VALUES (?,?);";
 	            PreparedStatement ps = conn.prepareStatement(sql);
-	            ps.setString(1, licitacao.getDescricao() );
-	            ps.setInt(2, licitacao.getLicitanteId());
+	            ps.setString(1, licitacao.getDescricao());
+	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ps.executeUpdate();
 	            ps.close();
 	            conn.close();
@@ -31,11 +32,11 @@ public class LicitacaoDAO {
 	    public boolean alterar(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ? WHERE id = ?;";
+	            String sql = "UPDATE " + NOMEDATABELA + " SET descricao = ? WHERE idLicitacao = ? and idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitacao.getDescricao());
-	            ps.setInt(2, licitacao.getId());
-	            ps.setInt(3, licitacao.getLicitanteId());
+	            ps.setInt(2, licitacao.getIdLicitacao());
+	            ps.setInt(3, licitacao.getLicitante().getId());
 	            ps.executeUpdate();
 	            ps.close();
 	            conn.close();
@@ -48,9 +49,10 @@ public class LicitacaoDAO {
 	    public boolean excluir(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE id = ?;";
+	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE idLicitacao = ? and idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
-	            ps.setInt(1, licitacao.getId());
+	            ps.setInt(1, licitacao.getIdLicitacao());
+	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ps.executeUpdate();
 	            ps.close();
 	            conn.close();
@@ -63,14 +65,18 @@ public class LicitacaoDAO {
 	    public Licitacao procurarPorCodigo(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE id = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE idLicitacao = ? and idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
-	            ps.setInt(1, licitacao.getId());
+	            ps.setInt(1, licitacao.getIdLicitacao());
+	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ResultSet rs = ps.executeQuery();
 	            if (rs.next()) {
 	            	Licitacao obj = new Licitacao();
-	                obj.setId(rs.getInt(1));
+	            	Licitante licitante = new Licitante();
+	                obj.setIdLicitacao(rs.getInt(1));
 	                obj.setDescricao(rs.getString(2));
+	                licitante.setId(rs.getInt(3));
+	                obj.setLicitante(licitante);
 	                ps.close();
 	                rs.close();
 	                conn.close();
@@ -89,14 +95,17 @@ public class LicitacaoDAO {
 	    public Licitacao procurarPorNome(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE descricao = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitacao.getDescricao());
 	            ResultSet rs = ps.executeQuery();
 	            if (rs.next()) {
 	            	Licitacao obj = new Licitacao();
-	                obj.setId(rs.getInt(1));
+	            	Licitante licitante = new Licitante();
+	                obj.setIdLicitacao(rs.getInt(1));
 	                obj.setDescricao(rs.getString(2));
+	                licitante.setId(rs.getInt(3));
+	                obj.setLicitante(licitante);
 	                ps.close();
 	                rs.close();
 	                conn.close();
@@ -114,9 +123,10 @@ public class LicitacaoDAO {
 	    public boolean existe(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE descricao = ? and idLicitante = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitacao.getDescricao());
+	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ResultSet rs = ps.executeQuery();
 	            if (rs.next()) {
 	                ps.close();
@@ -150,8 +160,11 @@ public class LicitacaoDAO {
 	        try {
 	            while (rs.next()) {
 	            	Licitacao obj = new Licitacao();
-	                obj.setId(rs.getInt(1));
+	            	Licitante licitante = new Licitante();
+	                obj.setIdLicitacao(rs.getInt(1));
 	                obj.setDescricao(rs.getString(2));
+	                licitante.setId(rs.getInt(3));
+	                obj.setLicitante(licitante);
 	                listObj.add(obj);
 	            }
 	            return listObj;

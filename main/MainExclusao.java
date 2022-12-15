@@ -9,7 +9,7 @@ public class MainExclusao {
 
 		// Teste Excluir
 		BO BO = new BO();
-		Empresa empresa = new Empresa(1);
+		Empresa empresa = new Empresa(4);
 		if (BO.excluir(empresa))
 			System.out.println("Excluido com Sucesso");
 		else

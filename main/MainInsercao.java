@@ -9,7 +9,7 @@ public class MainInsercao {
 	public static void main(String[] args) {
 		// Teste Inserir
 		BO BO = new BO();
-		Empresa empresa = new Empresa("Zanella maquinas");
+		Empresa empresa = new Empresa("ical");
 		if (BO.inserir(empresa))
 			System.out.println("Inserido com Sucesso");
 		else 

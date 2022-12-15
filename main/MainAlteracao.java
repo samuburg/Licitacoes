@@ -9,7 +9,7 @@ public class MainAlteracao {
 			
 		// Teste Alterar	
 		BO BO = new BO();
-		Empresa empresa = new Empresa(1,"Nova instituicao");
+		Empresa empresa = new Empresa(1,"HAVAN RIO DO SUL");
 		BO.alterar(empresa);
 		empresa = BO.procurarPorCodigo(empresa);
 		System.out.println(empresa);

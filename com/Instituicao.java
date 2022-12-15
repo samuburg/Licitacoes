@@ -12,9 +12,12 @@ public class Instituicao {
 	}
 	public Instituicao(int id) {
 		setId(id);
+		
 	}
 	public Instituicao(String nome) {
-		setNome(nome);
+		if (nome.length()>0) {
+			setNome(nome);
+		}
 	}
 	public Instituicao(int id, String nome) {
 		setId(id);
@@ -29,22 +32,27 @@ public class Instituicao {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome.length()>0) {
+			this.nome = nome;
+		}
+		
 	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
-		this.id = id;
+		if (id>0) {
+			this.id = id;
+		}
+		
 	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Instituicao [id=");
+		builder.append("id=");
 		builder.append(id);
 		builder.append(", nome=");
 		builder.append(nome);
-		builder.append("]");
 		return builder.toString();
 	}
 	

@@ -9,7 +9,7 @@ public class MainProcurarPorId {
 		
 		// Teste Procurar por Codigo
 		BO BO = new BO();
-		Empresa empresa = new Empresa(1,"");
+		Empresa empresa = new Empresa(2,"");
 		empresa = BO.procurarPorCodigo(empresa);
 		System.out.println(empresa);
 		
