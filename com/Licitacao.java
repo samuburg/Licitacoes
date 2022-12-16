@@ -1,7 +1,4 @@
 package com;
-
-import java.util.ArrayList;
-import java.util.List;
 import bo.LicitanteBO;
 
 
@@ -45,19 +42,10 @@ public class Licitacao {
 	public void setLicitante(Licitante licitante) {
 		// Só Pode colocar um Licitante já cadastrado previamente
 				LicitanteBO BO = new LicitanteBO();
-				List<Licitante> lista = new ArrayList<Licitante>();
-				List<Integer> idList = new ArrayList<Integer>();
-				lista = BO.pesquisarTodos();	
-				for (Licitante lici : lista) {
-					idList.add(lici.getId());
-				}
 				
-				if (licitante.getId()<=idList.get(idList.size()-1)) {
-					setLicitante(licitante);
+				if (BO.procurarPorCodigo(licitante)!=null) {
+					this.licitante = licitante;
 				}	
-		
-		
-		
 	}
 	
 	

@@ -32,11 +32,10 @@ public class LicitacaoDAO {
 	    public boolean alterar(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "UPDATE " + NOMEDATABELA + " SET descricao = ? WHERE idLicitacao = ? and idLicitante = ?;";
+	            String sql = "UPDATE " + NOMEDATABELA + " SET descricao = ? WHERE idLicitacao = ? ;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitacao.getDescricao());
 	            ps.setInt(2, licitacao.getIdLicitacao());
-	            ps.setInt(3, licitacao.getLicitante().getId());
 	            ps.executeUpdate();
 	            ps.close();
 	            conn.close();
@@ -49,10 +48,9 @@ public class LicitacaoDAO {
 	    public boolean excluir(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE idLicitacao = ? and idLicitante = ?;";
+	            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE idLicitacao = ? ;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, licitacao.getIdLicitacao());
-	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ps.executeUpdate();
 	            ps.close();
 	            conn.close();
@@ -65,10 +63,9 @@ public class LicitacaoDAO {
 	    public Licitacao procurarPorCodigo(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE idLicitacao = ? and idLicitante = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE idLicitacao = ? ;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, licitacao.getIdLicitacao());
-	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ResultSet rs = ps.executeQuery();
 	            if (rs.next()) {
 	            	Licitacao obj = new Licitacao();
@@ -123,10 +120,9 @@ public class LicitacaoDAO {
 	    public boolean existe(Licitacao licitacao) {
 	        try {
 	            Connection conn = Conexao.conectar();
-	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE descricao = ? and idLicitante = ?;";
+	            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE descricao = ?;";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setString(1, licitacao.getDescricao());
-	            ps.setInt(2, licitacao.getLicitante().getId());
 	            ResultSet rs = ps.executeQuery();
 	            if (rs.next()) {
 	                ps.close();

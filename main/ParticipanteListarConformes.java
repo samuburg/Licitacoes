@@ -14,7 +14,7 @@ public class ParticipanteListarConformes {
 		// Teste Pesquisar Todos
 		ParticipanteBO BO = new ParticipanteBO();
 		List<Participante> lista = new ArrayList<Participante>();
-		lista = BO.pesquisarParticipantesConformes();	
+		lista = BO.pesquisarParticipantesConformes(13);	
 		for (Participante participante : lista) {
 			System.out.println(participante.toString());
 		}

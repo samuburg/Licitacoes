@@ -45,9 +45,9 @@ public class ParticipanteBO {
 	        ParticipanteDAO DAO = new ParticipanteDAO();
 	        return DAO.pesquisarTodos();
 	    }
-	    public List<Participante> pesquisarParticipantesConformes(){
+	    public List<Participante> pesquisarParticipantesConformes(int idLicitacao){
 	        ParticipanteDAO DAO = new ParticipanteDAO();
-	        return DAO.pesquisarParticipantesConformes();
+	        return DAO.pesquisarParticipantesConformes(idLicitacao);
 	    }
 	    public List<Participante> ordenarParticipantesPorPreco(int idLicitacao){
 	        ParticipanteDAO DAO = new ParticipanteDAO();

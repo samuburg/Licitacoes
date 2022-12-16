@@ -12,7 +12,13 @@ public class LicitacaoMainProcurarPorDescricao {
 		LicitacaoBO BO = new LicitacaoBO();
 		Licitacao licitacao = new Licitacao("Tratar as capivaras da cidade");
 		licitacao = BO.procurarPorDescricao(licitacao);
-		System.out.println(licitacao);
+		
+		if (licitacao==null) {
+			System.out.println("Anulou");
+		}
+		else {
+			System.out.println(licitacao);
+		}
 
 	}
 }

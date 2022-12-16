@@ -140,10 +140,10 @@ public class ParticipanteDAO {
         }
     }
     
-    public List<Participante> pesquisarParticipantesConformes() {
+    public List<Participante> pesquisarParticipantesConformes(int idLicitacao) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " where conformidade = true;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " where idLicitacao = "+idLicitacao+" and conformidade = true;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Participante> listObj = montarLista(rs);

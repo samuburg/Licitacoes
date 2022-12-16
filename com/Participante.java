@@ -1,8 +1,5 @@
 package com;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bo.BO;
 import bo.LicitacaoBO;
 
@@ -34,16 +31,9 @@ public class Participante {
 	public void setEmpresa(Empresa empresa) {
 			//Deixa setar somente uma empresa já cadastrada previamente
 			BO BO = new BO();
-			List<Empresa> lista = new ArrayList<Empresa>();
-			List<Integer> idList = new ArrayList<Integer>();
-			lista = BO.pesquisarTodos();	
-			for (Empresa emp : lista) {
-				idList.add(emp.getId());
-			}
-				
-			if (empresa.getId()<=idList.get(idList.size()-1)) {
+			if (BO.procurarPorCodigo(empresa)!=null) {
 				this.empresa = empresa;
-			}
+			}	
 		
 		
 		
@@ -55,21 +45,10 @@ public class Participante {
 	public void setLicitacao(Licitacao licitacao) {
 		
 		//Só deixa setar uma licitação já cadastrada
-		LicitacaoBO BO = new LicitacaoBO();
-		List<Licitacao> lista = new ArrayList<Licitacao>();
-		List<Integer> idList = new ArrayList<Integer>();
-		lista = BO.pesquisarTodos();	
-		for (Licitacao lici : lista) {
-			idList.add(lici.getIdLicitacao());
-		}
-		
-		if (licitacao.getIdLicitacao()<=idList.get(idList.size()-1)) {
+		LicitacaoBO bo = new LicitacaoBO();
+		if (bo.procurarPorCodigo(licitacao)!=null) {
 			this.licitacao = licitacao;
-		}
-		
-		
-		
-		
+		}	
 	}
 	public float getPreco() {
 		return preco;
